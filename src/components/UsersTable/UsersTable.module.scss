@@ -1,0 +1,63 @@
+/* Responsive behavior */
+@media (max-width: 991px) {
+  .table {
+
+    /* Hide table headers */
+    thead {
+      border-bottom: 1px black solid;
+
+      :nth-child(3) {
+        display: none;
+      }
+
+      tr {
+        display: flex;
+        columns: 3;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+
+        th {
+          border: 0;
+        }
+
+
+      }
+    }
+
+    /* Make rows block-level */
+    tr {
+      display: block;
+    }
+
+    td:nth-child(2) {
+      width: 25px;
+      padding: 0;
+      margin: 0;
+
+      &:before {
+        content: '#';
+      }
+    }
+
+    td:nth-child(3) {
+      margin-left: 10vw;
+    }
+
+    td:nth-child(-n + 3) {
+      border: 0;
+    }
+
+    td:nth-child(n + 4) {
+      display: flex;
+
+      /* Add header text */
+      &:before {
+        content: attr(data-th) ": ";
+        font-weight: bold;
+        width: 50%;
+        display: inline-block;
+      }
+    }
+  }
+}
