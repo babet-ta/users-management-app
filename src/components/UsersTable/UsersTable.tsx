@@ -29,6 +29,8 @@ import {
 } from '@/store/userSlice';
 import DeleteConfirmationModal from '@/components/DeleteConfirmationModal/DeleteConfirmationModal';
 import UserAvatar from '@/components/UserAvatar/UserAvatar';
+import { AddUserButton } from '@/components/AddUserButton/AddUserButton';
+import { AddUserForm } from '@/components/AddUserForm/AddUserForm';
 import styles from './UsersTable.module.scss'
 
 const UsersTable: React.FC = () => {
@@ -43,6 +45,7 @@ const UsersTable: React.FC = () => {
   } = useAppSelector((state) => state.users);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = React.useState(false);
 
   useEffect(() => {
     dispatch(fetchUsers());
@@ -88,7 +91,6 @@ const UsersTable: React.FC = () => {
     setIsDeleteModalOpen(false);
   };
 
-  if (isLoading) return <Typography>Loading...</Typography>;
   if (error) return <Typography color="error">Error: {error}</Typography>;
 
   return (
@@ -100,7 +102,7 @@ const UsersTable: React.FC = () => {
           alignItems: 'center',
           mb: 2
         }}>
-
+          <AddUserButton onClick={() => setIsAddModalOpen(true)} />
           {selectedUsers.length > 0 && (
             <Button
               variant="contained"
@@ -187,7 +189,10 @@ const UsersTable: React.FC = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
+        <AddUserForm
+          open={isAddModalOpen}
+          onClose={() => setIsAddModalOpen(false)}
+        />
         <DeleteConfirmationModal
           open={isDeleteModalOpen}
           onClose={() => setIsDeleteModalOpen(false)}
