@@ -1,5 +1,19 @@
-export const validate = (values: any) => {
-  const errors: any = {};
+interface Values {
+  name: string;
+  username: string;
+  email: string;
+  phone: string;
+}
+
+interface Errors {
+  name?: string;
+  username?: string;
+  email?: string;
+  phone?: string;
+}
+
+export const validate = (values: Values): Errors => {
+  const errors: Errors = {};
 
   if (!values.name) {
     errors.name = 'Required';

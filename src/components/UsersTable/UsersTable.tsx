@@ -38,7 +38,6 @@ const UsersTable: React.FC = () => {
   const {
     users,
     selectedUsers,
-    isLoading,
     error,
     sortOrder,
     sortBy
